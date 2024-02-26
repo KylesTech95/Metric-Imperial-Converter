@@ -1,5 +1,5 @@
 'use strict';
-require ('dotenv').config();
+
 const express     = require('express');
 const bodyParser  = require('body-parser');
 const expect      = require('chai').expect;
@@ -37,17 +37,6 @@ app.use(function(req, res, next) {
     .type('text')
     .send('Not Found');
 });
-
-
-
-
-
-
-
-
-
-
-
 
 const port = process.env.PORT || 3000;
 
