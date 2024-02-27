@@ -93,7 +93,7 @@ function ConvertHandler() {
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    let result = { initNum: initNum,initUnit: initUnit,returnNum: returnNum,returnUnit: returnUnit,string:`${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}` }
+    let result = { initNum: initNum,initUnit: initUnit,returnNum: returnNum, returnUnit: returnUnit,string:`${initNum} ${initNum != 1 ? this.spellOutUnit(initUnit) : this.spellOutUnit(initUnit).slice(0,-1)} converts to ${returnNum} ${returnNum != 1 ? this.spellOutUnit(returnUnit) : this.spellOutUnit(returnUnit).slice(0,-1)}` }
     
     return result;
   };

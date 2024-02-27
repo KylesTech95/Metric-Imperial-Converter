@@ -5,7 +5,8 @@ const expect = require('chai').expect;
 const ConvertHandler = require('../controllers/convertHandler.js');
 
 const valUnit = (u) => {
-  return ['kg','lbs','L','km','gal','mi','l'].includes(u)
+  let res = u.toLowerCase()
+  return ['kg','lbs','L','km','gal','mi','l'].includes(res)
 }
 
 module.exports = function (app) {  
@@ -19,30 +20,26 @@ module.exports = function (app) {
     let return_u = convertHandler.getReturnUnit(u) //return unit
     let string = convertHandler.getString(n,u,return_n,return_u)
     // console.log(typeof n)
-    console.log(n)
-    console.log(u)
-    console.log(return_u)
-    console.log(return_n)
-    console.log(string)
+    // console.log(n)
+    // console.log(u)
+    // console.log(return_u)
+    // console.log(return_n)
+    // console.log(string)
     res.send(string)
   }
 
   app.get('/api/convert',(req,res)=>{
     const { input } = req.query;
-    let num = (input.match(/[^a-z]/g)||[]).join`` // get numbers in eval form
+    let num = (input.match(/[^a-z]/gi)||[1]).join`` // get numbers in eval form
     let unit = (input.match(/[a-z]/gi)||[]).join`` // get units
-    if(num==undefined){
-      num = 1;
-      console.log(num)
-    } 
-    // console.log(valUnit(unit))
-    // console.log(myEval(num))
+
     try {
       if(!myEval(num)&&!valUnit(unit)){
         res.send('invalid number and unit')
       }
       else if(!myEval(num)&&valUnit(unit)){
         res.send('invalid number')
+        console.log('so invalid')
       }
       else if(myEval(num)&&!valUnit(unit)){
         res.send('invalid unit')
