@@ -19,6 +19,7 @@ module.exports = function (app) {
     let return_n = convertHandler.convert(n,u)
     let return_u = convertHandler.getReturnUnit(u) //return unit
     let string = convertHandler.getString(n,u,return_n,return_u)
+    console.log(typeof +n)
     res.send(string)
   }
 
@@ -33,14 +34,12 @@ module.exports = function (app) {
     const { input } = req.query;
     let num = (input.match(/[^a-zA-Z]/g)||[1]).join`` // get numbers in eval form
     let unit = (input.match(/[a-z]/gi)||[]).join`` // get units
-    console.log('real num: '+num)
     try {
       if(!myEval(num)&&!valUnit(unit)){
         res.send('invalid number and unit')
       }
       else if(!myEval(num)&&valUnit(unit)){
         res.send('invalid number')
-        console.log('so invalid')
       }
       else if(myEval(num)&&!valUnit(unit)){
         res.send('invalid unit')
