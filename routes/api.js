@@ -7,20 +7,7 @@ const ConvertHandler = require('../controllers/convertHandler.js');
 const valUnit = (u) => {
   return ['kg','lbs','L','km','gal','mi','l'].includes(u)
 }
-//  myEval = (num) => {
-//   let arr = num.split``
-//   try{
-//     if((/\d/.test(arr[0])&&/\d/.test(arr[arr.length-1])) || arr.length < 2){
-//       console.log(arr)
-//     }
-//     else{
-//       return NaN
-//     }
-//   }
-//   catch(error){
-//     console.log(error)
-//   }
-// }
+
 module.exports = function (app) {  
   let convertHandler = new ConvertHandler();
   const startConvert = (num,unit,res) => {
@@ -32,13 +19,12 @@ module.exports = function (app) {
     let return_u = convertHandler.getReturnUnit(u) //return unit
     let string = convertHandler.getString(n,u,return_n,return_u)
     // console.log(typeof n)
-    // console.log(n)
-    // console.log(u)
-    // console.log(return_u)
-    // console.log(sp_unit)
-    // console.log(reuturn_n)
-    // console.log(string)
+    console.log(n)
+    console.log(u)
+    console.log(return_u)
+    console.log(return_n)
     console.log(string)
+    res.send(string)
   }
 
   app.get('/api/convert',(req,res)=>{
@@ -49,8 +35,8 @@ module.exports = function (app) {
       num = 1;
       console.log(num)
     } 
-    console.log(valUnit(unit))
-    console.log(myEval(num))
+    // console.log(valUnit(unit))
+    // console.log(myEval(num))
     try {
       if(!myEval(num)&&!valUnit(unit)){
         res.send('invalid number and unit')
